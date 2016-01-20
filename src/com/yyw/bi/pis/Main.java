@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.yyw.bi.pis.business.ProductService;
-import com.yyw.bi.pis.model.ProductReport;
+import com.yyw.bi.pis.business.ItemService;
+import com.yyw.bi.pis.model.ItemReport;
 
 public class Main {
 
@@ -14,9 +14,9 @@ public class Main {
   public static void main(String[] args) {
     logger.info("start...");
     String site = "¿µ°®¶à¹ÙÍø";
-    ProductService productService = new ProductService();
+    ItemService productService = new ItemService();
     productService.clearCounterStatistics();
-    List<ProductReport> productList = productService.processProductList("", site);
+    List<ItemReport> productList = productService.processProductList("", site);
     productService.exportProductReport(productList);
     productService.dumpCounterStatistics();
     logger.info("end...");

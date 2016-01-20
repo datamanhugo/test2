@@ -3,19 +3,20 @@ package com.yyw.bi.pis.model;
 import org.apache.log4j.Logger;
 
 /*
- * YYW Product
+ * YYW Item
  */
-public class Product {
+public class Item {
 
-  private static Logger logger = Logger.getLogger(Product.class);
+  private static Logger logger = Logger.getLogger(Item.class);
 
   private String id;
   private String productID;
   private String productName;
   private String approveNo;
   private String norm;
-  private String type;
+  private String levelOneCat;
   private String levelTwoCat;
+  private String levelThreeCat;
   private String manufacturer;
   private String price;
   private String salesNum;
@@ -63,12 +64,12 @@ public class Product {
     this.norm = norm;
   }
 
-  public String getType() {
-    return type;
+  public String getLevelOneCat() {
+    return levelOneCat;
   }
 
-  public void setType(String type) {
-    this.type = type;
+  public void setLevelOneCat(String levelOneCat) {
+    this.levelOneCat = levelOneCat;
   }
 
   public String getLevelTwoCat() {
@@ -77,6 +78,14 @@ public class Product {
 
   public void setLevelTwoCat(String levelTwoCat) {
     this.levelTwoCat = levelTwoCat;
+  }
+
+  public String getLevelThreeCat() {
+    return levelThreeCat;
+  }
+
+  public void setLevelThreeCat(String levelThreeCat) {
+    this.levelThreeCat = levelThreeCat;
   }
 
   public String getManufacturer() {
@@ -127,28 +136,28 @@ public class Product {
     this.url = url;
   }
 
-  public boolean isMatched(CompetitorProduct product) {
+  public boolean isMatched(CompetitorItem product) {
     if (product != null) {
       return product.isApproveNoMatched(this);
     }
     return false;
   }
 
-  protected boolean isApproveNoMatched(CompetitorProduct product) {
+  protected boolean isApproveNoMatched(CompetitorItem product) {
     if (product != null) {
       return product.isApproveNoMatched(this);
     }
     return false;
   }
 
-  protected boolean isProductNameMatched(CompetitorProduct product) {
+  protected boolean isProductNameMatched(CompetitorItem product) {
     if (product != null) {
       return product.isApproveNoMatched(this);
     }
     return false;
   }
 
-  protected boolean isNormMatched(CompetitorProduct product) {
+  protected boolean isNormMatched(CompetitorItem product) {
     if (product != null) {
       return product.isApproveNoMatched(this);
     }
@@ -160,7 +169,7 @@ public class Product {
     buffer.append("productName:" + productName);
     buffer.append(",approveNo:" + approveNo);
     buffer.append(",norm:" + norm);
-    buffer.append(",type:" + type);
+    buffer.append(",category:" + levelOneCat);
     buffer.append(",price:" + price);
     buffer.append(",site:" + site);
     return buffer.toString();

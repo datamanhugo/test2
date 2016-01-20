@@ -29,7 +29,6 @@ public class DBConnectionManager {
 			this.url = url;
 			this.user = user;
 			this.password = password;
-			// 加载驱动程序
 			Class.forName(driver);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,7 +41,6 @@ public class DBConnectionManager {
 			this.url = "jdbc:mysql://localhost/crawler";
 			this.user = "root";
 			this.password = "";
-			// 加载驱动程序
 			Class.forName(driver);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,7 +48,6 @@ public class DBConnectionManager {
 		}
 	}
 
-	// 建立新的连接返回连接句柄
 	public Connection getConnection() throws SQLException {
 		Connection conn = DriverManager.getConnection(url, user, password);
 		conn.setAutoCommit(false);
@@ -79,14 +76,11 @@ public class DBConnectionManager {
 
 	public static void main(String[] args) {
 		String driver = "com.mysql.jdbc.Driver";
-		// URL指向要访问的数据库名******
 		// String url =
 		// "jdbc:mysql://localhost/crawler useUnicode=true&characterEncoding=utf-8";
 		String url = "jdbc:mysql://localhost/crawler";
 
-		// MySQL配置时的用户名
 		String user = "root";
-		// Java连接MySQL配置时的密码******
 		String password = "";
 
 		try {
@@ -96,19 +90,17 @@ public class DBConnectionManager {
 			if (!connection.isClosed())
 				System.out.println("Succeeded connecting to the Database!");
 
-			// statement用来执行SQL语句
 			Statement statement = connection.createStatement();
 			statement.execute("set Names utf8");
 
-			// 要执行的SQL语句id和content是表review中的项。
-			String sql = "select title from crawler.medicine_info where site='康爱多官网' and date='2016-01-13' AND type='中西药' limit 0,50 ";
+			String sql = "select title from crawler.medicine_info limit 0,50 ";
 			// String sql =
 			// "select title from crawler.medicine_info limit 0,50 ";
 
 			ResultSet rs = statement.executeQuery(sql);
 			System.out.println("SQL:" + sql);
 
-			// 输出id值和content值
+			// 锟斤拷锟絠d值锟斤拷content值
 			while (rs.next()) {
 				System.out.println(rs.getString("title"));
 			}

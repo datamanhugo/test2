@@ -1,20 +1,22 @@
 package com.yyw.bi.pis.model;
 
 /*
- *Compared Product Report
+ *Compared Item Report
  */
-public class ProductReport implements Comparable {
+public class ItemReport implements Comparable {
 
   private String dateTime;
   private String levelOneCat;
   private String levelTwoCat;
-  private String site;
+  private String levelThreeCat;
+  private String competitorName;
   private String productID;
-  private String siteProductName;
   private String productName;
+  private String competitorProductName;
   private String norm;
-  private String originalPrice;
+  private String competitorNorm;
   private String price;
+  private String competitorPrice;
   private String diffPrice;
   private String diffPecent;
   private String average;
@@ -45,12 +47,20 @@ public class ProductReport implements Comparable {
     this.levelTwoCat = levelTwoCat;
   }
 
+  public String getLevelThreeCat() {
+    return levelThreeCat;
+  }
+
+  public void setLevelThreeCat(String levelThreeCat) {
+    this.levelThreeCat = levelThreeCat;
+  }
+
   public String getSite() {
-    return site;
+    return competitorName;
   }
 
   public void setSite(String site) {
-    this.site = site;
+    this.competitorName = site;
   }
 
   public String getProductID() {
@@ -61,12 +71,12 @@ public class ProductReport implements Comparable {
     this.productID = productID;
   }
 
-  public String getSiteProductName() {
-    return siteProductName;
+  public String getCompetitorProductName() {
+    return competitorProductName;
   }
 
-  public void setSiteProductName(String siteProductName) {
-    this.siteProductName = siteProductName;
+  public void setCompetitorProductName(String siteProductName) {
+    this.competitorProductName = siteProductName;
   }
 
   public String getProductName() {
@@ -84,13 +94,21 @@ public class ProductReport implements Comparable {
   public void setNorm(String norm) {
     this.norm = norm;
   }
-
-  public String getOriginalPrice() {
-    return originalPrice;
+  
+  public String getCompetitorName() {
+    return competitorName;
   }
 
-  public void setOriginalPrice(String originalPrice) {
-    this.originalPrice = originalPrice;
+  public String getCompetitorNorm() {
+    return competitorNorm;
+  }
+
+  public void setCompetitorNorm(String competitorNorm) {
+    this.competitorNorm = competitorNorm;
+  }
+
+  public void setCompetitorName(String competitorName) {
+    this.competitorName = competitorName;
   }
 
   public String getPrice() {
@@ -99,6 +117,14 @@ public class ProductReport implements Comparable {
 
   public void setPrice(String price) {
     this.price = price;
+  }
+
+  public String getCompetitorPrice() {
+    return competitorPrice;
+  }
+
+  public void setCompetitorPrice(String price) {
+    this.competitorPrice = price;
   }
 
   public String getDiffPrice() {
@@ -144,8 +170,8 @@ public class ProductReport implements Comparable {
   @Override
   public int compareTo(Object o) {
     if (o != null) {
-      if (o instanceof ProductReport) {
-        ProductReport productReport = (ProductReport) o;
+      if (o instanceof ItemReport) {
+        ItemReport productReport = (ItemReport) o;
         return this.productID.compareToIgnoreCase(productReport.productID);
       }
     }
@@ -168,7 +194,7 @@ public class ProductReport implements Comparable {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    ProductReport other = (ProductReport) obj;
+    ItemReport other = (ItemReport) obj;
     if (productID == null) {
       if (other.productID != null)
         return false;
@@ -179,15 +205,18 @@ public class ProductReport implements Comparable {
 
   public String toString() {
     StringBuffer buffer = new StringBuffer();
-    buffer.append(levelOneCat);
+    buffer.append(dateTime);
+    buffer.append("," + levelOneCat);
     buffer.append("," + levelTwoCat);
-    buffer.append("," + site);
+    buffer.append("," + levelThreeCat);
+    buffer.append("," + competitorName);
     buffer.append("," + productID);
-    buffer.append("," + siteProductName);
     buffer.append("," + productName);
+    buffer.append("," + competitorProductName);
     buffer.append("," + norm);
-    buffer.append("," + originalPrice);
+    buffer.append("," + competitorNorm);
     buffer.append("," + price);
+    buffer.append("," + competitorPrice);
     buffer.append("," + diffPrice);
     buffer.append("," + diffPecent);
     buffer.append("," + average);

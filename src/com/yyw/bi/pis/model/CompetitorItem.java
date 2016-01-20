@@ -7,9 +7,9 @@ import com.yyw.bi.pis.util.Utility;
 /*
  * Competitor product base class, if competitor have diffent rule, override this class
  */
-public class CompetitorProduct {
+public class CompetitorItem {
 
-  private static Logger logger = Logger.getLogger(CompetitorProduct.class);
+  private static Logger logger = Logger.getLogger(CompetitorItem.class);
 
   public static int counter_1 = 0;
   public static int counter_2 = 0;
@@ -136,7 +136,7 @@ public class CompetitorProduct {
     this.url = url;
   }
 
-  public boolean isMatched(Product product) {
+  public boolean isMatched(Item product) {
     if (product != null) {
       if (isApproveNoMatched(product)) {
         if (isNormMatched(product)) {
@@ -161,7 +161,7 @@ public class CompetitorProduct {
     return false;
   }
 
-  protected boolean isApproveNoMatched(Product product) {
+  protected boolean isApproveNoMatched(Item product) {
     if (this.approveNo != null) {
       if (this.approveNo.equalsIgnoreCase(product.getApproveNo())) {
         return true;
@@ -170,7 +170,7 @@ public class CompetitorProduct {
     return false;
   }
 
-  protected boolean isProductNameMatched(Product product) {
+  protected boolean isProductNameMatched(Item product) {
     if (this.productName != null) {
       if (this.productName.equalsIgnoreCase(product.getProductName())) {
         return true;
@@ -191,7 +191,7 @@ public class CompetitorProduct {
     return false;
   }
 
-  protected boolean isNormMatched(Product product) {
+  protected boolean isNormMatched(Item product) {
     String competitorFormatNorm = Utility.formatNorm(this.norm);
     String formatNorm = Utility.formatNorm(product.getNorm());
     if (competitorFormatNorm.equalsIgnoreCase(formatNorm)) {

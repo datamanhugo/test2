@@ -1,5 +1,8 @@
 package com.yyw.bi.pis.util;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +14,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 import org.apache.log4j.Logger;
+
+import com.yyw.bi.pis.model.ItemReport;
 
 public class Utility {
 
@@ -141,18 +146,12 @@ public class Utility {
     return strDate;
   }
 
+
   public static void main(String[] args) {
     System.out.println(getCurrentDateTime("yyyy_MM_dd_HH_mm_ss"));
     System.out.println(getCurrentDateTime("yyyyMMdd_HH_mm_ss"));
     System.out.println(parseNorm("7cm*10cm*2*3"));
     System.out.println(evalNorm(parseNorm("7cm*10cm*2*3")));
-    
-    String result ="50*10¡£";
-    if (result.endsWith("¡£")) {
-      result = result.substring(0, result.length() - 1);
-    }
-    System.out.println("result=" + result);
-
   }
 
 }

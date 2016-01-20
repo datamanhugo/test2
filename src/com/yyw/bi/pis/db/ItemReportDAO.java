@@ -8,29 +8,31 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.yyw.bi.pis.model.ProductReport;
+import com.yyw.bi.pis.model.ItemReport;
 import com.yyw.bi.pis.util.Utility;
 
 ;
 
-public class ProductReportDAO {
+public class ItemReportDAO {
 
-  private static Logger logger = Logger.getLogger(ProductReportDAO.class);
+  private static Logger logger = Logger.getLogger(ItemReportDAO.class);
 
-  public void saveProductReport(List<ProductReport> productReportList) {
+  public void saveItemReport(List<ItemReport> productReportList) {
     // tbd
   }
 
-  public void exportProductReport(List<ProductReport> productReportList) {
+  public void exportItemReport(List<ItemReport> productReportList) {
     logger.info("exportProductReport, match size: " + productReportList.size());
 
-    String title = "Ò»¼¶ÀàÄ¿,¶þ¼¶ÀàÄ¿,¾ºÕù¶ÔÊÖ,ÉÌÆ·±àºÅ,¾ºÕù¶ÔÊÖÃû³Æ,ÉÌÆ·Ãû³Æ,¸ñÊ½»¯¹æ¸ñ,Ò©Íø¼Û¸ñ,¾ºÕù¶ÔÊÖ¼Û¸ñ,¼Û¸ñ²î,±ÈÀý,¸ß/Æ½/µÍ,ÏúÁ¿,ÍøÖ·";
+    String title = "æ—¥æœŸ,ä¸€çº§ç±»ç›®,äºŒçº§ç±»ç›®,ä¸‰çº§ç±»ç›®,ç«žäº‰å¯¹æ‰‹,å•†å“ç¼–å·,å•†å“åç§°,ç«žäº‰å¯¹æ‰‹å•†å“åç§°,è§„æ ¼,ç«žäº‰å¯¹æ‰‹è§„æ ¼,ä»·æ ¼,ç«žäº‰å¯¹æ‰‹ä»·æ ¼,ä»·æ ¼å·®,æ¯”ä¾‹,é«˜/å¹³/ä½Ž,é”€é‡,ç½‘å€";
     String site ="";
+    String dateTime = "";
     if(productReportList.size() > 0)
     {
       site = productReportList.get(0).getSite();
+      dateTime =  productReportList.get(0).getDateTime();
     }
-    String fileName = "./output/pis_" + site + "_" + Utility.getCurrentDateTime("yyyyMMdd_HH_mm_ss") + ".csv";
+    String fileName = "./output/pis_" + site + "_" + dateTime + Utility.getCurrentDateTime("_HH_mm_ss") + ".csv";
 
     try {
       File file = new File(fileName);
@@ -42,7 +44,7 @@ public class ProductReportDAO {
       bw.write(title);
       bw.newLine();
       //Collections.sort(productReportList);
-      for (ProductReport product : productReportList) {
+      for (ItemReport product : productReportList) {
         bw.write(product.toString());
         bw.newLine();
       }

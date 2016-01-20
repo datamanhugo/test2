@@ -8,22 +8,18 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.yyw.bi.pis.model.CompetitorProduct;
-import com.yyw.bi.pis.model.Product;
+import com.yyw.bi.pis.model.CompetitorItem;
+import com.yyw.bi.pis.model.Item;
 
-public class ProductDAO {
+public class ItemDAO {
 
-  private static Logger logger = Logger.getLogger(ProductDAO.class);
+  private static Logger logger = Logger.getLogger(ItemDAO.class);
 
-  // public static String YYW_SQL =
-  // "select PROD_NAME from crawler.yyw_prod_info_new where date(CREATE_date) = '2016-01-15' limit 0,50 ";
-  public static String YYW_SQL = "select PROD_ID, PROD_NAME,APPROVALNUM,NEW_NORMS,CAT1_NAME,CAT2_NAME, originalPrice,PM_NUM from crawler.yyw_prod_info_new where date(CREATE_date) = '2016-01-15'";
-  // public static String CRAWLER_SQL =
-  // "select title from crawler.medicine_info where site='øµ∞Æ∂‡πŸÕ¯' and date='2016-01-15' AND type='÷–Œ˜“©' limit 0,50 ";
-  public static String COMPETITOR_SQL = "select title,pzwh,guige,type,price,site, detailUrl from crawler.medicine_info where date='2016-01-15'";
+  public static String YYW_SQL = "select CREATE_date, PROD_ID, PROD_NAME,APPROVALNUM,NEW_NORMS,CAT1_NAME,CAT2_NAME, CAT3_NAME,originalPrice,PM_NUM from crawler.yyw_prod_info_new where date(CREATE_date) = '2016-01-18'";
+  public static String COMPETITOR_SQL = "select title,pzwh,guige,type,price,site, detailUrl from crawler.medicine_info where date='2016-01-18'";
 
-  public List<Product> getYywProductList(String date) {
-    List<Product> productList = new ArrayList<Product>();
+  public List<Item> getYywItemList(String date) {
+    List<Item> productList = new ArrayList<Item>();
     DBConnectionManager connMgr = DBConnectionManager.getInstance();
     Connection connection = null;
     Statement statement = null;
@@ -35,27 +31,30 @@ public class ProductDAO {
       logger.debug("SQL:" + sql);
 
       while (rs.next()) {
+        String dataTime = rs.getDate("CREATE_date").toString();
         String productID = rs.getString("PROD_ID");
         String productName = rs.getString("PROD_NAME");
         String approveNo = rs.getString("APPROVALNUM");
         String norm = rs.getString("NEW_NORMS");
-        String type = rs.getString("CAT1_NAME");
+        String levelOneCat = rs.getString("CAT1_NAME");
         String levelTwoCat = rs.getString("CAT2_NAME");
+        String levelThreeCat = rs.getString("CAT3_NAME");
         String price = "" + rs.getDouble("originalPrice");
         String salesNum = "" + rs.getInt("PM_NUM");
         String site = "YYW";
-        if (type == null) {
+        if (levelOneCat == null) {
           // System.out.println("productName:" + productName
           // + " type is null");
-        } else if (type.equalsIgnoreCase("÷–Œ˜“©∆∑")) {
-          // System.out.println("÷–Œ˜“©∆∑");
-          Product product = new Product();
+        } else if (levelOneCat.equalsIgnoreCase("‰∏≠Ë•øËçØÂìÅ")) {
+          Item product = new Item();
+          product.setDate(dataTime);
           product.setProductID(productID);
           product.setProductName(productName);
           product.setApproveNo(approveNo);
           product.setNorm(norm);
-          product.setType(type);
+          product.setLevelOneCat(levelOneCat);
           product.setLevelTwoCat(levelTwoCat);
+          product.setLevelThreeCat(levelThreeCat);
           product.setPrice(price);
           product.setSalesNum(salesNum);
           product.setSite(site);
@@ -76,8 +75,8 @@ public class ProductDAO {
     return productList;
   }
 
-  public List<CompetitorProduct> getCompetitorProductList(String date, String crawlerSite) {
-    List<CompetitorProduct> productList = new ArrayList<CompetitorProduct>();
+  public List<CompetitorItem> getCompetitorItemList(String date, String crawlerSite) {
+    List<CompetitorItem> productList = new ArrayList<CompetitorItem>();
     DBConnectionManager connMgr = DBConnectionManager.getInstance();
     Connection connection = null;
     Statement statement = null;
@@ -100,9 +99,8 @@ public class ProductDAO {
         if (type == null || site == null) {
           // System.out.println("productName:" + productName
           // + " type is null");
-        } else if (type.equalsIgnoreCase("÷–Œ˜“©") && site.equalsIgnoreCase(crawlerSite)) {
-          // System.out.println("÷–Œ˜“©∆∑");
-          CompetitorProduct product = new CompetitorProduct();
+        } else if (type.equalsIgnoreCase("‰∏≠Ë•øËçØ") && site.equalsIgnoreCase(crawlerSite)) {
+          CompetitorItem product = new CompetitorItem();
           product.setProductID(productID);
           product.setProductName(productName);
           product.setApproveNo(approveNo);
