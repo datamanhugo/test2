@@ -29,6 +29,7 @@ public class Test {
 
   public static void main(String[] args) {
     write();
+    System.out.println("保存成功");
   }
 
 }

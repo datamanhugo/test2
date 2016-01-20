@@ -38,9 +38,9 @@ public class DBConnectionManager {
 	public DBConnectionManager() {
 		try {
 			this.driver = "com.mysql.jdbc.Driver";
-			this.url = "jdbc:mysql://localhost/crawler";
-			this.user = "root";
-			this.password = "";
+			this.url = "jdbc:mysql://10.6.41.22/crawler";
+			this.user = "pis";
+			this.password = "pis";
 			Class.forName(driver);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,10 +78,10 @@ public class DBConnectionManager {
 		String driver = "com.mysql.jdbc.Driver";
 		// String url =
 		// "jdbc:mysql://localhost/crawler useUnicode=true&characterEncoding=utf-8";
-		String url = "jdbc:mysql://localhost/crawler";
+		String url = "jdbc:mysql://10.6.41.22/crawler";
 
-		String user = "root";
-		String password = "";
+		String user = "pis";
+		String password = "pis";
 
 		try {
 			DBConnectionManager connectionManager = new DBConnectionManager(
